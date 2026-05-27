@@ -4,15 +4,15 @@ Path: `data/business-yoga/appointments/appointment--<YYYY-MM-DD>--<HH-MM>--<cust
 
 Filename encodes the time + customer + tutor for fast `search_files` lookups by any dimension.
 
-Example: `appointment--2026-05-28--07-00--wendy-zhang-7a3f--lily-chen.md`
+Example: `appointment--2026-05-28--07-00--wendy-tan-7a3f--lily-tan.md`
 
 ## Frontmatter
 
 ```yaml
 ---
-customer_slug: "wendy-zhang-7a3f"
+customer_slug: "wendy-tan-7a3f"
 customer_name: "Wendy Zhang"
-tutor_slug: "lily-chen"
+tutor_slug: "lily-tan"
 tutor_name: "Lily Chen"
 start_at: "2026-05-28T07:00:00+08:00"     # ISO 8601 with TZ. Studio's local TZ.
 duration_minutes: 60

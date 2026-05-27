@@ -2,19 +2,19 @@
 
 Path: `data/business-yoga/tutors/tutor--<slug>.md`
 
-`<slug>` = lowercased name with hyphens (e.g. `lily-chen`).
+`<slug>` = lowercased name with hyphens (e.g. `lily-tan`).
 
 ## Frontmatter
 
 ```yaml
 ---
-name: "Lily Chen"
-display_name_zh: "陈丽丽"        # optional, Chinese display name
-slug: "lily-chen"
+name: "Lily Tan"
+display_name_zh: "陈丽莉"        # optional, Mandarin display name (SG Chinese audience)
+slug: "lily-tan"
 specialty: ["Vinyasa", "Hatha"]  # list, class types they teach. Used by yoga-scheduling for matching.
 bio_short: "RYT-500 with 8 years teaching experience, focus on alignment and breath."
 bio_zh: "RYT-500 八年教学经验, 专注体式和呼吸"  # optional
-languages: ["en", "zh"]
+languages: ["en", "zh", "ms"]    # ISO codes. SG context: English primary + Mandarin / Malay / Tamil as needed.
 status: "active"                  # enum: active / on-leave / departed
 availability:                     # required, weekly recurring schedule (UTC times)
   monday:    [{ start: "07:00", end: "08:00", class_type: "Vinyasa" }]

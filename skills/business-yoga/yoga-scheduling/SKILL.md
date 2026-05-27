@@ -50,7 +50,7 @@ Triggered by a scheduling intent in the user message. The bot classifies intent 
 
 `data/business-yoga/appointments/appointment--<YYYY-MM-DD>--<HH-MM>--<customer-slug>--<tutor-slug>.md`
 
-Example: `appointment--2026-05-28--07-00--wendy-zhang-7a3f--lily-chen.md`
+Example: `appointment--2026-05-28--07-00--wendy-tan-7a3f--lily-tan.md`
 
 ### Frontmatter
 

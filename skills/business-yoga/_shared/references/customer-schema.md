@@ -2,14 +2,14 @@
 
 Path: `data/business-yoga/customers/customer--<slug>.md`
 
-`<slug>` = lowercased name with hyphens + 4-digit random suffix (e.g. `wendy-zhang-7a3f`).
+`<slug>` = lowercased name with hyphens + 4-digit random suffix (e.g. `wendy-tan-7a3f`).
 
 ## Frontmatter
 
 ```yaml
 ---
-name: "Wendy Zhang"              # required, customer's chosen name (display)
-phone: "13912345678"              # required, primary dedup key (CN: 11 digits, intl: +country)
+name: "Wendy Tan"                 # required, customer's chosen name (display)
+phone: "+65 9123 4567"            # required, primary dedup key (SG: 8 digits w/ +65; or intl: +country)
 level: "beginner"                 # required, enum: beginner / intermediate / advanced (zh: 初学/进阶/资深)
 goal: "destress"                  # required, enum: destress / tone / recovery / other (zh: 减压/塑形/康复/其他)
 preferred_time: "morning"         # required, enum: morning / noon / evening / weekend (zh: 早班/午班/晚班/周末)

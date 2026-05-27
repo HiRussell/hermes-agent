@@ -38,7 +38,7 @@ Triggered automatically when a new user starts a conversation, or manually by ad
 | Field | Required | Validation |
 |---|---|---|
 | `name` | yes | Any non-empty text. Becomes the customer file title and slug. |
-| `phone` | yes | 11 digits (CN mainland) or international `+...` format. Used as primary dedup key. |
+| `phone` | yes | SG mobile (8 digits starting with `8` or `9`) or international `+65 XXXX XXXX` format. Used as primary dedup key. |
 | `level` | yes | One of: `beginner` / `intermediate` / `advanced` (or zh: `初学` / `进阶` / `资深`). |
 | `goal` | yes | One of: `destress` / `tone` / `recovery` / `other` (or zh: `减压` / `塑形` / `康复` / `其他`). |
 | `preferred_time` | yes | One of: `morning` / `noon` / `evening` / `weekend` (or zh: `早班` / `午班` / `晚班` / `周末`). |
@@ -53,7 +53,7 @@ Triggered automatically when a new user starts a conversation, or manually by ad
    - `search_files target='files' path='data/business-yoga/customers/' pattern='phone: <phone>'`
    - If any match found, do NOT create a new file — handoff to `yoga-customer-mgmt` ("looks like you're already registered, let me pull up your profile").
 6. **Persist** with `write_file`:
-   - Path: `data/business-yoga/customers/customer--<slug>.md` where `<slug>` is the name lowercased + hyphenated + 4-digit random suffix (e.g. `customer--wendy-zhang-7a3f.md`).
+   - Path: `data/business-yoga/customers/customer--<slug>.md` where `<slug>` is the name lowercased + hyphenated + 4-digit random suffix (e.g. `customer--wendy-tan-7a3f.md`).
    - Content: markdown with frontmatter (`name`, `phone`, `level`, `goal`, `preferred_time`, `status: confirmed`, `created_via: yoga-registration`, `created_at: <ISO timestamp>`) + a one-sentence summary body.
    - See `references/customer-schema.md` for the exact template.
 7. **Close warmly**: "All set! ✓ I'll help you find a class this week — which time slot looks good?" (zh: "已为你建档 ✓. 接下来我帮你看本周合适的课, 想试试哪个时段?").
@@ -70,7 +70,7 @@ Triggered automatically when a new user starts a conversation, or manually by ad
 - Don't ask for phone in a group chat (privacy). If user added the bot in a group, redirect to DM first.
 - Don't invent customer data if the user hesitates. Leave fields blank, ask again later.
 - Don't create duplicate files. Always `search_files` by phone before `write_file`.
-- **Language**: default to English. If the user opens with Chinese (or any CJK characters), mirror Chinese for the entire session. Pick the user's language and stick to it — don't mix languages mid-conversation.
+- **Language**: default to English (SG primary). If the user opens in Mandarin (CJK characters), Malay, or Tamil, mirror that language for the entire session. Pick the user's language and stick to it — don't mix languages mid-conversation.
 
 ## Verification
 

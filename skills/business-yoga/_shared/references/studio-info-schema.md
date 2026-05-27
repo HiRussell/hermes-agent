@@ -42,21 +42,21 @@ language_priority: ["en", "zh"]
 
 ## Drop-in
 
-- Single class: ¥180 / class
-- Workshop (90 min): ¥280
+- Single class: S$38 / class
+- Workshop (90 min): S$58
 
 ## Monthly
 
-- 8 classes / month: ¥1280 (¥160 / class)
-- Unlimited / month: ¥2480
+- 8 classes / month: S$248 (~S$31 / class)
+- Unlimited / month: S$348
 
 ## Annual
 
-- 100 classes / year: ¥12800 (¥128 / class)
+- Unlimited / year: S$2480 (~S$207 / month)
 
-## 价目 (中文)
+## 价目 (中文 — 可选, 如服务中文客户)
 
-(same structure, repeated in Chinese for native-language readers)
+(same structure, repeated in Mandarin for SG Chinese-speaking customers)
 ```
 
 ## Maintenance
