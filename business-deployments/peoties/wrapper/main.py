@@ -51,6 +51,11 @@ HERMES_API_URL = os.getenv(
 # path can't surprise us — hermes api_server binds IPv4 by default.
 HERMES_MODEL = os.getenv("HERMES_MODEL", "hermes-agent").strip()
 HERMES_TIMEOUT_SECONDS = float(os.getenv("HERMES_TIMEOUT_SECONDS", "180"))
+
+# Bearer token sent on every hermes call. Required when hermes has
+# API_SERVER_KEY set (which it must, to enable X-Hermes-Session-Id for
+# per-user session continuity). The two values must match.
+HERMES_API_KEY = os.getenv("HERMES_API_KEY", "").strip()
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
 
 TELEGRAM_MAX_MESSAGE_CHARS = 4000  # Telegram hard limit is 4096; leave headroom.
@@ -195,6 +200,8 @@ async def call_hermes(caller: Caller, user_text: str) -> str:
         "Content-Type": "application/json",
         "X-Hermes-Session-Id": session_id,
     }
+    if HERMES_API_KEY:
+        headers["Authorization"] = f"Bearer {HERMES_API_KEY}"
 
     async with httpx.AsyncClient(timeout=HERMES_TIMEOUT_SECONDS) as client:
         response = await client.post(HERMES_API_URL, json=payload, headers=headers)
@@ -359,6 +366,12 @@ async def post_init(app: Application) -> None:
 def main() -> None:
     if not BOT_TOKEN:
         sys.stderr.write("PEOTIES_BOT_TOKEN env var is required\n")
+        sys.exit(2)
+    if not HERMES_API_KEY:
+        sys.stderr.write(
+            "HERMES_API_KEY env var is required — must match hermes's "
+            "API_SERVER_KEY, otherwise session continuity is rejected.\n"
+        )
         sys.exit(2)
 
     app = (

@@ -97,7 +97,8 @@ delivers updates to one consumer.
 | Variable | Required | Default | Notes |
 |---|---|---|---|
 | `PEOTIES_BOT_TOKEN` | yes | — | From `@BotFather`. The same token previously used by hermes telegram platform. |
-| `HERMES_API_URL` | no | `http://localhost:8642/v1/chat/completions` | Hermes api_server endpoint. |
+| `HERMES_API_KEY` | yes | — | Must equal hermes's `API_SERVER_KEY`. Hermes refuses `X-Hermes-Session-Id` (per-user session continuity) without one. Generate with `openssl rand -hex 32`. |
+| `HERMES_API_URL` | no | `http://127.0.0.1:8642/v1/chat/completions` | Hermes api_server endpoint. |
 | `HERMES_MODEL` | no | `hermes-agent` | Model name from `/v1/models`. |
 | `HERMES_TIMEOUT_SECONDS` | no | `180` | Increase for long intake conversations. |
 | `LOG_LEVEL` | no | `INFO` | DEBUG / INFO / WARNING / ERROR. |

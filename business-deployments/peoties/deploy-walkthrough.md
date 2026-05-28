@@ -58,9 +58,17 @@ Important:
   flip back fast if the wrapper has a bug.
 - `API_SERVER_HOST=127.0.0.1` keeps the HTTP endpoint localhost-only.
   Do not expose 8642 publicly; the wrapper is the only client.
-- Do **not** set `API_SERVER_KEY` for now — we're on the loopback
-  interface and the wrapper doesn't authenticate. Add one when this
-  process moves to a separate machine.
+- **`API_SERVER_KEY` is required**, not optional. Hermes refuses
+  `X-Hermes-Session-Id` (per-user session continuity, which is the whole
+  point of the wrapper) without one — even on loopback. Generate a
+  strong key now and you'll copy the same value into the wrapper's
+  `HERMES_API_KEY` in step 3:
+
+  ```bash
+  HERMES_KEY=$(openssl rand -hex 32)
+  echo "API_SERVER_KEY=$HERMES_KEY" | sudo tee -a /opt/hermes-agent/.env >/dev/null
+  # Stash $HERMES_KEY in your shell — step 3.3 needs it.
+  ```
 
 Don't restart yet — that's step 4.
 
@@ -84,8 +92,11 @@ python3.11 -m venv .venv
 
 # Wrapper env
 cp .env.example .env
+chmod 600 .env
 $EDITOR .env
 # Paste the bot token captured in step 0 into PEOTIES_BOT_TOKEN.
+# Paste $HERMES_KEY from step 2 into HERMES_API_KEY (must match hermes's
+# API_SERVER_KEY exactly).
 # Defaults for HERMES_API_URL / HERMES_MODEL / HERMES_TIMEOUT_SECONDS are fine.
 
 # Install systemd unit
