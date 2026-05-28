@@ -1,0 +1,23 @@
+[Unit]
+Description=Peoties Telegram wrapper bot (forwards to hermes-agent api_server)
+After=network-online.target hermes-gateway.service
+Wants=network-online.target
+# Wrapper depends on hermes api_server being up; start order only, no hard binding.
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/hermes-agent/business-deployments/peoties/wrapper
+EnvironmentFile=/opt/hermes-agent/business-deployments/peoties/wrapper/.env
+ExecStart=/opt/hermes-agent/business-deployments/peoties/wrapper/.venv/bin/python main.py
+Restart=on-failure
+RestartSec=5s
+StandardOutput=append:/var/log/peoties-wrapper.log
+StandardError=append:/var/log/peoties-wrapper.log
+
+# Telegram polling is a long-lived process; give it room to recover from
+# transient API errors without systemd flapping.
+StartLimitIntervalSec=120
+StartLimitBurst=10
+
+[Install]
+WantedBy=multi-user.target
